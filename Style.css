@@ -30,8 +30,10 @@ header{
     display: flex;/*organizar elementos em linha*/
     justify-content: space-between;/*Distribui os elementos e deixa o máximo de espaço entre eles*/
     align-items: center;/*alinha verticalmente ao centro*/
-    padding: 40px 7%;/*40px é o espaço em cima e em baixo 7% é o espaço dos lados*/
+    padding: 40px clamp(20px,7vw,100px);/*40px é o espaço em cima e em baixo 7% é o espaço dos lados*/
 }
+
+
 
 .logo{
     font-size:34px;
@@ -51,7 +53,7 @@ nav{
 nav a{
     color:#999; /* Define a cor inicial dos links*/
     text-decoration:none; /*Remove o sublinhado dos links*/
-    transition:.3s; /* Cria uma transição suave de 0.3 segundos nas mudanças de estilo */
+    transition:.3s; /* Cria uma transição suave de 0.3 segundos nas mudanças de estilo, no hover não é brusco */
 }
 
 nav a:hover{
@@ -59,12 +61,13 @@ nav a:hover{
 }
 
 .hero{
-    height: 100vh;  /*Define a altura da secção como 100% da altura do ecrã (viewport height). A hero ocupa sempre pelo menos o tamanho visível da janela*/
-    min-height: 750px; /* Define uma altura mínima de 750px. Mesmo que o ecrã seja pequeno, a secção nunca fica menor que este valor.*/
+    height: 100dvh;  /*Define a altura da secção como 100% da altura do ecrã (viewport height). A hero ocupa sempre pelo menos o tamanho visível da janela*/
+    min-height: auto; /* Define uma altura mínima de 750px. Mesmo que o ecrã seja pequeno, a secção nunca fica menor que este valor.*/
     position: relative; /* Define esta secção como referência para elementos com position: absolute. Exemplo: vídeo de fundo ou imagens posicionadas dentro da hero.*/
     display: flex; /*Coloca lado a lado (em linha)*/
     align-items: center;
-    padding: 100px 7%;
+    padding: clamp(60px,8vw,100px)
+        clamp(20px,7vw,100px);
     overflow: hidden; /*Esconde qualquer conteúdo que ultrapasse os limites da hero. Corta parte do vídeo*/
 }
 
@@ -89,6 +92,7 @@ nav a:hover{
 }
 
 .hero-content{
+    width: 100%;
     max-width: 1200px;
 }
 
@@ -112,7 +116,7 @@ h1 span{
 
 .description{
     margin-top: 40px;
-    min-width: 600px;
+    min-width: auto;
     font-size: 21px;
     line-height: 1.7;
     color:#999
@@ -130,7 +134,7 @@ h1 span{
 }
 
 .button:hover{
-    transform: translateY(-5px); /*move o botão 5px para cima quando o rato passa por cima. O valor negativo (-5px) significa movimento para cima*/
+    transform: translateY(-5px); /*move o botão 5px para cima quando o rato passa por cima. O valor negativo (-5px) significa movimento para cima por alguma razão*/
 
     box-shadow: 0 0 40px rgba(0, 150, 255, .6);/* Adiciona uma sombra/brilho à volta do botão*/
 }
@@ -147,12 +151,12 @@ h1 span{
 .about,
 .contact{
 
-    padding:120px 7%;
+    padding: clamp(60px, 8vw, 120px) clamp(20px, 7vw, 100px); /*no telemóvel 20px de lado, tablet adapta e desktop pode chegar aos 100px*/
 
 } 
 
 h2{
-    font-size: 60px;
+    font-size: clamp(40px, 10vw, 60px);
     letter-spacing: -3px;
     margin-bottom: 70px;
 }
@@ -369,8 +373,24 @@ textarea{
     cursor: pointer;
 }
 
+.hidden{
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s;
+}
+
+.show{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h1,h2,h3,p{
+    overflow-wrap: break-word; /*Evitar que em telas pequenas as palavras grandes saiam do ecrã*/
+}
+
+
 /*Permite aplicar estilos apenas quando o dispositivo cumpre condições específicas, modifica o layout quando a tela tiver no máximo 800px*/
-@media(max-width:800px){
+@media(max-width:500px){
 
     nav{
         display:none;
